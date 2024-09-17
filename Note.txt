@@ -1,11 +1,9 @@
 FORM:
 https://docs.google.com/forms/d/e/1FAIpQLSdOOlK6M5r5daad_IPLBdzTWAnXvmgAutCmGoiiIuhkNS1f4Q/viewform
 
-<<<<<<< HEAD
 ĐIỂM DANH:
 https://docs.google.com/spreadsheets/d/1S5WLXC2dx2hPg4vyAv-XaFe8LzUmmNcFUsOy0mTkdEc/edit?usp=sharing
 ----
-=======
 
 https://www.youtube.com/watch?v=vQzBCmzuSzs
 
@@ -14,4 +12,3 @@ https://www.virtualbox.org/wiki/Downloads
 
 
 ---
->>>>>>> 9202bda (update)
