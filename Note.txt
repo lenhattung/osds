@@ -29,15 +29,7 @@ https://www.virtualbox.org/wiki/Downloads
 
 -----------------------------------------------------------------------------------------------
 
-4 câu lệnh:
-
-git remote add newUpstream https://github.com/lenhattung/osds
-
-git remote -v
-
-git fetch newUpstream
-
-git merge newUpstream/main
+https://googlechromelabs.github.io/chrome-for-testing/
 
 
 
