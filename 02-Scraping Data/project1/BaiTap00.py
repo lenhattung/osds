@@ -16,4 +16,4 @@ bonk_img = driver.find_element(By.ID, "bonk")
 while True:
     bonk_img.click()
     print("Clicked on the bonk image")
-    time.sleep(2)
+    time.sleep(0.1)
