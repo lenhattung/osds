@@ -1,3 +1,4 @@
+-----------------------------------------------------------------------------------------------
 FORM:
 https://docs.google.com/forms/d/e/1FAIpQLSdOOlK6M5r5daad_IPLBdzTWAnXvmgAutCmGoiiIuhkNS1f4Q/viewform
 
@@ -23,13 +24,18 @@ Meeting ID: 916 0161 1098
 Passcode: 311572
 
 -----------------------------------------------------------------------------------------------
-https://www.youtube.com/watch?v=vQzBCmzuSzs
-
-https://www.virtualbox.org/wiki/Downloads
-
------------------------------------------------------------------------------------------------
+Tools:
 
 https://googlechromelabs.github.io/chrome-for-testing/
+
+-----------------------------------------------------------------------------------------------
+Recordings:
+17/09 https://youtu.be/I1dmJPy617Q
+24/09 https://youtu.be/YE3p5yXYEYI
+
+-----------------------------------------------------------------------------------------------
+KiemTra:
+KT01: https://docs.google.com/forms/d/e/1FAIpQLSf3RuO4yELeF5IFl-RBCXqgBLU2Ggtr51qys5Pxu_yR0jkTmw/viewform
 
 
 
