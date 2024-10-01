@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
+from selenium.webdriver import ActionChains
 import time
 import pandas as pd
 
@@ -36,14 +37,21 @@ time.sleep(1)
 body = driver.find_element(By.TAG_NAME, "body")
 time.sleep(3)
 
-try:
-    buttons_xt =  WebDriverWait(driver, 10).until(
-        EC.presence_of_all_elements_located((By.XPATH, "//button[contains(text(), 'Xem thêm') and contains(text(), 'sản phẩm')]"))
-    )
+for k in range (10):
+    try:
+        # Lấy tất cả các button trên trang
+       buttons = driver.find_elements(By.TAG_NAME, "button")
+
+       # Duyệt qua từng button
+       for button in buttons:
+           # Kiểm tra nếu nội dung của button chứa "Xem thêm" và "sản phẩm"
+           if "Xem thêm" in button.text and "sản phẩm" in button.text:
+               # Di chuyển tới button và click
+               button.click()
+               break  # Thoát khỏi vòng lặp nếu đã click thành công
     
-    buttons_xt[len(buttons_xt)-1].click()
-except:
-    pass
+    except Exception as e:
+        print(f"Lỗi: {e}")
 
 # Nhấn phím mũi tên xuống nhiều lần để cuộn xuống từ từ
 for i in range(50):  # Lặp 30 lần, mỗi lần cuộn xuống một ít
