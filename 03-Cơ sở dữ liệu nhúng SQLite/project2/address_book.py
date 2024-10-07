@@ -84,7 +84,7 @@ def truy_van():
 
     # Hien thi du lieu
     for r in records:
-        tree.insert("", END, values=(r[0],  r[2], r[1]))
+        tree.insert("", END, values=(r[0], r[1], r[2]))
 
     # Ngat ket noi
     conn.close()
