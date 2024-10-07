@@ -26,7 +26,44 @@ root.geometry("600x800")
 # )
 
 def them():
-     print("")
+    # Kết nối và lấy dữ liệu
+    conn = sqlite3.connect('address_book.db')
+    c = conn.cursor()
+    # Lấy dữ liệu đã nhập
+    name_value =f_name.get()
+    lastName_value = l_name.get()
+    address_value = address.get()
+    city_value = city.get()
+    state_value = state.get()
+    zipcode_value = zipcode.get()
+    # Thực hiện câu lệnh để thêm
+    c.execute('''
+        INSERT INTO 
+        addresses (first_name, last_name, address, city, state, zipcode)
+        VALUES 
+        (:name, :last_name, :address,:city, :state, :zipcode)
+    ''',{
+        'name' : name_value,
+        'last_name' : lastName_value,
+        'address': address_value,
+        'city': city_value,
+        'state': state_value,
+        'zipcode': zipcode_value,
+      }
+    )
+    conn.commit()
+    conn.close()
+
+    # Reset form
+    f_name.delete(0, END)
+    l_name.delete(0, END)
+    address.delete(0, END)
+    city.delete(0, END)
+    state.delete(0, END)
+    zipcode.delete(0, END)
+
+    # Hien thi lai du lieu
+    truy_van()
 
 def xoa():
     print("")
