@@ -7,13 +7,14 @@ root = Tk()
 root.title("Hệ thống quản lý địa chỉ")
 root.geometry("600x800")
 
-# Kết nối tới db
-conn = sqlite3.connect('address_book.db')
-c = conn.cursor()
-
-# Tao bang de luu tru
+# # Kết nối tới db
+# conn = sqlite3.connect('address_book.db')
+# c = conn.cursor()
+#
+# # Tao bang de luu tru
 # c.execute('''
 #     CREATE TABLE addresses(
+#         id INTEGER PRIMARY KEY AUTOINCREMENT,
 #         first_name text,
 #         last_name text,
 #         address text,
@@ -34,8 +35,22 @@ def cap_nhat():
     print("")
 
 def truy_van():
-    print("")
+    # Xóa đi các dữ liệu trong TreeView
+    for row in tree.get_children():
+        tree.delete(row)
 
+    # Kết nối và lấy dữ liệu
+    conn = sqlite3.connect('address_book.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM addresses")
+    records = c.fetchall()
+
+    # Hien thi du lieu
+    for r in records:
+        tree.insert("", END, values=(r[0],  r[2], r[1]))
+
+    # Ngat ket noi
+    conn.close()
 def chinh_sua():
     print("")
 
