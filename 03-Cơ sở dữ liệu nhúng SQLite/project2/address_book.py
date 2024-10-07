@@ -66,7 +66,20 @@ def them():
     truy_van()
 
 def xoa():
-    print("")
+    # Kết nối và lấy dữ liệu
+    conn = sqlite3.connect('address_book.db')
+    c = conn.cursor()
+    c.execute('''DELETE FROM
+                        addresses 
+                      WHERE id=:id''',
+              {'id':delete_box.get()})
+    delete_box.delete(0, END)
+    conn.commit()
+    conn.close()
+    # Hiên thi thong bao
+    messagebox.showinfo("Thông báo", "Đã xóa!")
+    # Hiển thị lại dữ liệu
+    truy_van()
 
 def cap_nhat():
     print("")
