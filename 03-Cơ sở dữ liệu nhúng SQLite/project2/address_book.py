@@ -149,6 +149,9 @@ tree_frame.pack(pady=10)
 # Treeview để hiển thị bản ghi
 columns = ("ID", "Họ", "Tên")
 tree = ttk.Treeview(tree_frame, columns=columns, show="headings", height=15)
+for column in columns:
+    tree.column(column, anchor=CENTER) # This will center text in rows
+    tree.heading(column, text=column)
 tree.pack()
 
 # Định nghĩa tiêu đề cho các cột
