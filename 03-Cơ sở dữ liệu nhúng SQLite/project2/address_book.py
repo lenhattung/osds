@@ -81,8 +81,6 @@ def xoa():
     # Hiển thị lại dữ liệu
     truy_van()
 
-def cap_nhat():
-    print("")
 
 def truy_van():
     # Xóa đi các dữ liệu trong TreeView
@@ -102,7 +100,90 @@ def truy_van():
     # Ngat ket noi
     conn.close()
 def chinh_sua():
-    print("")
+    global editor
+    editor = Tk()
+    editor.title('Cập nhật bản ghi')
+    editor.geometry("400x300")
+
+    conn = sqlite3.connect('address_book.db')
+    c = conn.cursor()
+    record_id = delete_box.get()
+    c.execute("SELECT * FROM addresses WHERE id=:id", {'id':record_id})
+    records = c.fetchall()
+
+    global f_id_editor, f_name_editor, l_name_editor, address_editor, city_editor, state_editor, zipcode_editor
+
+    f_id_editor = Entry(editor, width=30)
+    f_id_editor.grid(row=0, column=1, padx=20, pady=(10, 0))
+    f_name_editor = Entry(editor, width=30)
+    f_name_editor.grid(row=1, column=1, padx=20)
+    l_name_editor = Entry(editor, width=30)
+    l_name_editor.grid(row=2, column=1)
+    address_editor = Entry(editor, width=30)
+    address_editor.grid(row=3, column=1)
+    city_editor = Entry(editor, width=30)
+    city_editor.grid(row=4, column=1)
+    state_editor = Entry(editor, width=30)
+    state_editor.grid(row=5, column=1)
+    zipcode_editor = Entry(editor, width=30)
+    zipcode_editor.grid(row=6, column=1)
+
+    f_id_label = Label(editor, text="ID")
+    f_id_label.grid(row=0, column=0, pady=(10, 0))
+    f_name_label = Label(editor, text="Họ")
+    f_name_label.grid(row=1, column=0)
+    l_name_label = Label(editor, text="Tên")
+    l_name_label.grid(row=2, column=0)
+    address_label = Label(editor, text="Địa chỉ")
+    address_label.grid(row=3, column=0)
+    city_label = Label(editor, text="Thành phố")
+    city_label.grid(row=4, column=0)
+    state_label = Label(editor, text="Tỉnh/Thành")
+    state_label.grid(row=5, column=0)
+    zipcode_label = Label(editor, text="Mã bưu chính")
+    zipcode_label.grid(row=6, column=0)
+
+    for record in records:
+        f_id_editor.insert(0, record[0])
+        f_name_editor.insert(0, record[1])
+        l_name_editor.insert(0, record[2])
+        address_editor.insert(0, record[3])
+        city_editor.insert(0, record[4])
+        state_editor.insert(0, record[5])
+        zipcode_editor.insert(0, record[6])
+
+    edit_btn = Button(editor, text="Lưu bản ghi", command=cap_nhat)
+    edit_btn.grid(row=6, column=0, columnspan=2, pady=10, padx=10, ipadx=145)
+
+def cap_nhat():
+    conn = sqlite3.connect('address_book.db')
+    c = conn.cursor()
+    record_id = f_id_editor.get()
+
+    c.execute("""UPDATE addresses SET
+           first_name = :first,
+           last_name = :last,
+           address = :address,
+           city = :city,
+           state = :state,
+           zipcode = :zipcode
+           WHERE id = :id""",
+              {
+                  'first': f_name_editor.get(),
+                  'last': l_name_editor.get(),
+                  'address': address_editor.get(),
+                  'city': city_editor.get(),
+                  'state': state_editor.get(),
+                  'zipcode': zipcode_editor.get(),
+                  'id': record_id
+              })
+
+    conn.commit()
+    conn.close()
+    editor.destroy()
+
+    # Cập nhật lại danh sách bản ghi sau khi chỉnh sửa
+    truy_van()
 
 
 # Khung cho các ô nhập liệu
@@ -146,7 +227,7 @@ submit_btn = Button(button_frame, text="Thêm bản ghi", command=them)
 submit_btn.grid(row=0, column=0, columnspan=2, pady=10, padx=10, ipadx=100)
 query_btn = Button(button_frame, text="Hiển thị bản ghi", command=truy_van)
 query_btn.grid(row=1, column=0, columnspan=2, pady=10, padx=10, ipadx=137)
-delete_box_label = Label(button_frame, text="Chọn ID để xóa")
+delete_box_label = Label(button_frame, text="Chọn ID")
 delete_box_label.grid(row=2, column=0, pady=5)
 delete_box = Entry(button_frame, width=30)
 delete_box.grid(row=2, column=1, pady=5)
