@@ -1,24 +1,28 @@
 from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-import time
-import pandas as pd
 import re
+import time
 import sqlite3
+
+
 
 ######################################################
 # 0. Tạo cơ sở dữ liệu
 conn = sqlite3.connect('painters.db')
 c = conn.cursor()
-
-c.execute('''
-    CREATE TABLE painter (
-        id integer primary key autoincrement,
-        name text,
-        birth text,
-        death text,
-        nationality text
-    )
-''')
+try:
+    c.execute('''
+        CREATE TABLE painter (
+            id integer primary key autoincrement,
+            name text,
+            birth text,
+            death text,
+            nationality text
+        )
+    ''')
+except Exception as e:
+    print(e)
 
 def them(name, birth, death, nationality):
     conn = sqlite3.connect('painters.db')
@@ -43,8 +47,22 @@ all_links = []
 ######################################################
 # II. Lay ra tat ca duong dan de truy cap den painters
 # Khởi tạo Webdriver
+
+# Đường dẫn đến file thực thi geckodriver
+gecko_path = r"C:/Users/tungi/Downloads/geckodriver.exe"
+
+# Khởi tởi đối tượng dịch vụ với đường geckodriver
+ser = Service(gecko_path)
+
+# Tạo tùy chọn
+options = webdriver.firefox.options.Options();
+options.binary_location ="C:/Program Files/Mozilla Firefox/firefox.exe"
+# Thiết lập firefox chỉ hiện thị giao diện
+options.headless = False
+
 for i in range(70, 71):
-    driver = webdriver.Chrome()
+    # Khởi tạo driver
+    driver = webdriver.Firefox(options=options, service=ser)
     url = "https://en.wikipedia.org/wiki/List_of_painters_by_name_beginning_with_%22"+chr(i)+"%22"
     try:
 
@@ -85,7 +103,7 @@ for link in all_links:
     print(link)
     try:
         # Khoi tao webdriver
-        driver = webdriver.Chrome()
+        driver = webdriver.Firefox(options=options, service=ser)
         # Mo trang
         url = link
         driver.get(url)
@@ -132,7 +150,7 @@ for link in all_links:
 
         # Dong web driver
         driver.quit()
-    except:
-        pass
+    except Exception as e:
+        print(e)
 
 ####################
